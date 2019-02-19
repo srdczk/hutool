@@ -81,5 +81,6 @@ public class CenterPanel extends JPanel{
         }));
         centerPanel.show(jButton);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //每次要重新初始化git仓库?
     }
 }
