@@ -14,6 +14,7 @@ public class HuJFrame extends JFrame{
 
     public void launch()
     {
+        System.out.println("你妈死了");
 
 //        setBounds(500, 200, 400, 500);
         setLayout(new BorderLayout());
