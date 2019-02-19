@@ -91,7 +91,7 @@ public class GUIUtil {
     }
     public static void initGlobalFont(){
 
-        FontUIResource fontUIResource = new FontUIResource(new Font("方正细等线",Font.PLAIN, 12));
+        FontUIResource fontUIResource = new FontUIResource(new Font("等线",Font.PLAIN, 12));
 
         for (Enumeration keys = UIManager.getDefaults().keys(); keys.hasMoreElements();) {
 
