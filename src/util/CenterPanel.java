@@ -69,15 +69,17 @@ public class CenterPanel extends JPanel{
 
 
         jFrame.setVisible(true);
-        centerPanel.show(new JButton("你们好"));
-        centerPanel.show(new JLabel(){
+        JButton jButton = new JButton("更换界面");
+//        centerPanel.show(new JButton("你们好"));
+        jButton.addActionListener(e -> centerPanel.show(new JLabel(){
             @Override
             public void paint(Graphics g)
             {
                 ImageIcon icon = new ImageIcon("d://1.jpg");
                 g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), icon.getImageObserver());
             }
-        });
+        }));
+        centerPanel.show(jButton);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
