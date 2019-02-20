@@ -63,7 +63,7 @@ public class MainPanel extends JPanel{
                 g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), icon.getImageObserver());
             }
         });
-        GUIUtil.showPanel(mainPanel);
+        GUIUtil.showPanel(mainPanel, 1);
 //        GUIUtil.setImageIcon("home.png", mainPanel.xfyl, "消费一览");
 ////        mainPanel.jToolBar.add(mainPanel.xfyl);
     }
