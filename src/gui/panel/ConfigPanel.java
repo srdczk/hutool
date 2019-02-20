@@ -1,5 +1,6 @@
 package gui.panel;
 
+import gui.listener.ConfigListener;
 import util.GUIUtil;
 
 import javax.swing.*;
@@ -37,6 +38,7 @@ public class ConfigPanel extends JPanel {
         setLayout(new BorderLayout());
         add(center, BorderLayout.NORTH);
 //        add(new JPanel());
+        gx.addActionListener(new ConfigListener());
         panel.add(gx);
         add(panel, BorderLayout.CENTER);
     }

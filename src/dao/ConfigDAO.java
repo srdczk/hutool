@@ -65,7 +65,7 @@ public class ConfigDAO {
 //    Connection connection = DBUtil.getConnection();
 
 
-    public static void add(Config config)
+    public void add(Config config)
     {
         String sql = "insert into config values (null, ?, ?)";
         try(
@@ -84,9 +84,9 @@ public class ConfigDAO {
         }
     }
 
-    public static void update(Config config)
+    public void update(Config config)
     {
-        String sql = "UPDATE config set key_ = ? value = ? WHERE id = ?";
+        String sql = "UPDATE config set key_ = ?, value = ? WHERE id = ?";
         try(
                 Connection c = DBUtil.getConnection();
                 PreparedStatement preparedStatement = c.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class ConfigDAO {
         }
     }
 
-    public static void delete(Config config)
+    public void delete(Config config)
     {
         String sql = "delete from config where id = ?";
         try(
@@ -120,7 +120,7 @@ public class ConfigDAO {
         }
     }
 
-    public static List<Config> list()
+    public List<Config> list()
     {
         List<Config> list = new ArrayList<>();
         String sql = "select * from config";
@@ -142,7 +142,7 @@ public class ConfigDAO {
         return list;
     }
 
-    public static Config get(int id)
+    public Config get(int id)
     {
         Config config = null;
         String sql = "select * from config where id = " + id;
@@ -164,7 +164,7 @@ public class ConfigDAO {
         return config;
     }
 
-    public static List<Config> list(int start, int count)
+    public List<Config> list(int start, int count)
     {
         List<Config> list = new ArrayList<>();
         String sql = "select * from config limit" + start + "," + count;
@@ -187,7 +187,7 @@ public class ConfigDAO {
         }
         return list;
     }
-    public static int getTotal()
+    public int getTotal()
     {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
@@ -208,4 +208,39 @@ public class ConfigDAO {
         return total;
     }
 
+    public Config getByKey(String key)
+    {
+        Config config = null;
+        String sql = "select * from config where key_ = ?";
+        try(
+                Connection c = DBUtil.getConnection();
+                PreparedStatement preparedStatement = c.prepareStatement(sql);
+                )
+        {
+            preparedStatement.setString(1, key);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next())
+            {
+                config = new Config(rs.getInt(1), rs.getString(2), rs.getString(3));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return config;
+    }
+    public static void main(String[] args)
+    {
+        ConfigDAO configDAO = new ConfigDAO();
+        List<Config> list = configDAO.list();
+
+        for(Config config : list)
+        {
+            System.out.println(config.getValue());
+        }
+//        configDAO.add(new Config(1, "budget", "1000"));
+        System.out.println("能够连接");
+
+    }
 }

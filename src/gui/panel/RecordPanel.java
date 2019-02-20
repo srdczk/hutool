@@ -1,12 +1,16 @@
 package gui.panel;
 
+import gui.listener.RecordListener;
 import gui.model.flComboBox;
 import org.jdesktop.swingx.JXDatePicker;
+import service.CategoryService;
 import util.GUIUtil;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,10 +68,19 @@ public class RecordPanel extends JPanel{
 //        add(new JPanel());
         add(new JPanel());
         add(center);
-
+        jyb.addActionListener(new RecordListener());
+//        addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+////                System.out.println(flC.getSelectedItem());
+//                System.out.println(new CategoryService().getId((String)flC.getSelectedItem()));
+//
+//            }
+//        });
     }
     public static void main(String[] args)
     {
         GUIUtil.showPanel(RecordPanel.recordPanel);
+
     }
 }

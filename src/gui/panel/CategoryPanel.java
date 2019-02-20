@@ -1,6 +1,9 @@
 package gui.panel;
 
+import dao.CategoryDAO;
+import dao.RecordDAO;
 import gui.model.ThisTable;
+import pojo.Record;
 import util.GUIUtil;
 
 import javax.swing.*;
@@ -8,6 +11,8 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +36,40 @@ public class CategoryPanel extends JPanel{
     public JButton xZeng = new JButton("新增");
     public JButton bJi = new JButton("编辑");
     public JButton sChu = new JButton("删除");
+
+
+
+    public void updateData()
+    {
+
+        int n = new CategoryDAO().getTotal();
+        RecordDAO r = new RecordDAO();
+//         = r.list();
+        int[] ints = new int[n];
+        for(int i = 0; i < n; ++i)
+        {
+            List<Record> list = r.list(i + 1);
+            for(Record record : list)
+            {
+                ints[i] += record.getSpend();
+            }
+
+        }
+
+//        thisTable.list.add("sdsdd");
+//        jTable.setValueAt(2, 3, 1);
+        jTable.setModel(new ThisTable(){
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                if(0==columnIndex)
+                    return list.get(rowIndex);
+                if(1==columnIndex)
+                    return ints[rowIndex];
+                return null;
+            }
+        });
+        repaint();
+    }
 
 
     public void setjPanel()

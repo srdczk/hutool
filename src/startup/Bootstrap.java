@@ -1,6 +1,13 @@
 package startup;
 
 import gui.frame.MainFrame;
+import gui.panel.ConfigPanel;
+import service.ConfigService;
+import util.GUIUtil;
+
+import javax.swing.*;
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @Auther: srd-czk
@@ -11,9 +18,7 @@ import gui.frame.MainFrame;
 public class Bootstrap {
     public MainFrame mainFrame = MainFrame.mainFrame;
 
-    public static void main(String[] args)
-    {
-
-        new Bootstrap();
+    public static void main(String[] args)  {
+        MainFrame.mainFrame.setVisible(true);
     }
 }

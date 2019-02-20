@@ -114,7 +114,27 @@ public class CategoryDAO {
     }
 
     public List<Category> list() {
-        return list(0, Short.MAX_VALUE);
+
+        List<Category> list = new ArrayList<>();
+        String sql = "select * from category";
+        try(
+                Connection c = DBUtil.getConnection();
+                Statement s = c.createStatement();
+                )
+        {
+            ResultSet rs = s.executeQuery(sql);
+
+            while (rs.next())
+            {
+                list.add(new Category(rs.getInt(1), rs.getString(2)));
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public List<Category> list(int start, int count) {

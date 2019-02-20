@@ -1,11 +1,18 @@
 package gui.panel;
 
+import dao.RecordDAO;
+import pojo.Record;
+import service.ConfigService;
 import util.CircleProgressBar;
 import util.ColorUtil;
+import util.DateUtil;
 import util.GUIUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
  * @Auther: srd-czk
@@ -27,15 +34,52 @@ public class SpendPanel extends JPanel{
     public JPanel xia = new JPanel();
 
     public JLabel byxf = new JLabel("本月消费");
-    public JLabel xfze = new JLabel("￥2300");
+    public JLabel xfze = new JLabel("￥0");
     public JLabel jrxf = new JLabel("今日消费");
-    public JLabel jrze = new JLabel("￥25");
+    public JLabel jrze = new JLabel("￥0");
 
 
-    public JLabel rjxf = new JLabel("￥120");
-    public JLabel bysy = new JLabel("￥2084");
-    public JLabel rjky = new JLabel("￥389");
-    public JLabel jlym = new JLabel("15天");
+    public JLabel rjxf = new JLabel("￥0");
+    public JLabel bysy = new JLabel("￥0");
+    public JLabel rjky = new JLabel("￥0");
+    public JLabel jlym = new JLabel((DateUtil.monthEnd().getDate() - DateUtil.toDay().getDate()) + "天");
+
+    public void updateData()
+    {
+        RecordDAO r = new RecordDAO();
+        int sum = Integer.valueOf(new ConfigService().get("budget"));
+        List<Record> list = r.list(DateUtil.toDay());
+        int jr = 0;
+        for(int i = 0; i < list.size(); ++i)
+        {
+            jr += list.get(i).getSpend();
+        }
+        List<Record> list1 = r.list(DateUtil.monthBegin(), DateUtil.toDay());
+        int alls = 0;
+        for(Record record : list1)
+        {
+            alls += record.getSpend();
+        }
+
+        xfze.setText("￥" + sum);
+        jrze.setText("￥" + jr);
+
+//        ;
+
+
+        rjxf.setText("￥" + (alls / (DateUtil.toDay().getDate() - DateUtil.monthBegin().getDate())));
+
+        bysy.setText("￥" + (sum - alls));
+
+        rjky.setText("￥" + ((sum - alls) / (DateUtil.monthEnd().getDate() - DateUtil.toDay().getDate())));
+
+        jlym.setText("￥" + (DateUtil.monthEnd().getDate() - DateUtil.toDay().getDate()) + "天");
+
+        circleProgressBar.progress = alls * 100 / sum;
+
+        repaint();
+    }
+
 
     private SpendPanel()
     {
@@ -69,9 +113,20 @@ public class SpendPanel extends JPanel{
         xia.add(jlym);
         add(center, BorderLayout.CENTER);
         add(xia, BorderLayout.SOUTH);
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+//                super.mouseClicked(e);
+                updateData();
+
+            }
+        });
     }
     public static void main(String[] args)
     {
+//        System.out.println(DateUtil.toDay().getDate());
+//        );
         GUIUtil.showPanel(SpendPanel.spendPanel);
+
     }
 }

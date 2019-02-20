@@ -2,6 +2,7 @@ package debugger;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.io.File;
 
 /**
  * @Auther: srd-czk
@@ -20,19 +21,31 @@ public class HuFrame extends JFrame{
     public JButton jButton = new JButton("消费一览");
     public JButton jButton1 = new JButton("记一笔");
 
+    static int a;
+    static {
+        System.out.println(a);
+    }
+
+
 
     public static HuFrame huFrame = new HuFrame();
 
     private HuFrame()
     {
-        setLayout(new BorderLayout());
-        setSize(500, 500);
-        jToolBar.add(jButton);
-        jToolBar.add(jButton1);
-        add(jToolBar, BorderLayout.NORTH);
-        add(jLabel, BorderLayout.CENTER);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setLayout(new BorderLayout());
+//        setSize(500, 500);
+//        jToolBar.add(jButton);
+//        jToolBar.add(jButton1);
+//        add(jToolBar, BorderLayout.NORTH);
+//        add(jLabel, BorderLayout.CENTER);
+//        setLocationRelativeTo(null);
+//        setVisible(true);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+    public static void main(String[] args)
+    {
+        File file = new File("C:\\Program Files\\MySQL\\MySQL Server 5.5", "bin/mysql.exe");
+        System.out.println(file.exists());
     }
 }
