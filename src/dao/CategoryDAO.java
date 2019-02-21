@@ -41,10 +41,11 @@ public class CategoryDAO {
 
     public void add(Category category) {
 
-        String sql = "insert into category values(null,?)";
+        String sql = "insert into category values(?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
-
-            ps.setString(1, category.getName());
+            int n = getTotal();
+            ps.setInt(1, n + 1);
+            ps.setString(2, category.getName());
 
             ps.execute();
 

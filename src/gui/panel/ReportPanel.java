@@ -1,10 +1,13 @@
 package gui.panel;
 
+import pojo.Record;
+import service.ReportService;
 import util.ChartUtil;
 import util.GUIUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * @Auther: srd-czk
@@ -20,6 +23,16 @@ public class ReportPanel extends JPanel {
     }
     public JLabel label = new JLabel();
     public static ReportPanel reportPanel = new ReportPanel();
+
+    public void updateData()
+    {
+
+        List<Record> rs = new ReportService().listThisMonthRecords();
+        Image i = ChartUtil.getImage(rs, 350, 250);
+        ImageIcon icon = new ImageIcon(i);
+        label.setIcon(icon);
+    }
+
     private ReportPanel()
     {
         setLayout(new BorderLayout());
@@ -27,6 +40,7 @@ public class ReportPanel extends JPanel {
         ImageIcon icon = new ImageIcon(i);
         label.setIcon(icon);
         add(label);
+        updateData();
     }
     public static void main(String[] args)
     {

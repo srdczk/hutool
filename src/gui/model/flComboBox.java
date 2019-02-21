@@ -15,7 +15,7 @@ public class flComboBox implements ComboBoxModel<String>
 {
     public List<String> list = new ArrayList<>();
 
-    String c;
+    public String c;
 
     public flComboBox()
     {

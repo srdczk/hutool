@@ -100,6 +100,25 @@ public class DateUtil {
         return c.getTime();
     }
 
+    public static int thisMonthTotalDay(){
+
+        long lastDayMilliSeconds = monthEnd().getTime();
+        long firstDayMilliSeconds = monthBegin().getTime();
+
+        return (int) ((lastDayMilliSeconds-firstDayMilliSeconds)/millisecondsOfOneDay) +1;
+    }
+
+    /**
+     *获取本月还剩多少天
+     * @return
+     */
+
+    public static int thisMonthLeftDay(){
+        long lastDayMilliSeconds = monthEnd().getTime();
+        long toDayMilliSeconds = toDay().getTime();
+        return (int) ((lastDayMilliSeconds-toDayMilliSeconds)/millisecondsOfOneDay) +1;
+    }
+
     public static void main(String[] args)
     {
         System.out.println(new Date());

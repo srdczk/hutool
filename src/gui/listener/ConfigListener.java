@@ -4,6 +4,7 @@ import dao.ConfigDAO;
 import gui.frame.MainFrame;
 import gui.panel.CategoryPanel;
 import gui.panel.ConfigPanel;
+import gui.panel.ReportPanel;
 import gui.panel.SpendPanel;
 import pojo.Config;
 import service.ConfigService;
@@ -61,7 +62,8 @@ public class ConfigListener implements ActionListener{
         p.sqlT.grabFocus();
 
         SpendPanel.spendPanel.updateData();
-        CategoryPanel.categoryPanel.updateData();
+        CategoryPanel.categoryPanel.update();
+        ReportPanel.reportPanel.updateData();
 
     }
 }

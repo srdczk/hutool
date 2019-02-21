@@ -68,10 +68,31 @@ public class SpendPanel extends JPanel{
 
 
         rjxf.setText("￥" + (alls / (DateUtil.toDay().getDate() - DateUtil.monthBegin().getDate())));
+        Font f = rjxf.getFont();
+        if(sum - alls < 0)
+        {
 
-        bysy.setText("￥" + (sum - alls));
+//            xfze.setFont(f);
+            xfze.setForeground(ColorUtil.warningColor);
+//            jrze.setFont(f);
+            jrze.setForeground(ColorUtil.warningColor);
 
-        rjky.setText("￥" + ((sum - alls) / (DateUtil.monthEnd().getDate() - DateUtil.toDay().getDate())));
+            bysy.setForeground(ColorUtil.warningColor);
+            bysy.setText("本月超支￥" + (alls - sum));
+            rjky.setText("￥" + 0);
+        }
+        else
+        {
+            xfze.setForeground(ColorUtil.blueColor);
+            jrze.setForeground(ColorUtil.blueColor);
+            bysy.setForeground(ColorUtil.grayColor);
+
+            bysy.setText("￥" + (sum - alls));
+            rjky.setText("￥" + ((sum - alls) / (DateUtil.monthEnd().getDate() - DateUtil.toDay().getDate())));
+        }
+
+
+
 
         jlym.setText("￥" + (DateUtil.monthEnd().getDate() - DateUtil.toDay().getDate()) + "天");
 
@@ -113,6 +134,7 @@ public class SpendPanel extends JPanel{
         xia.add(jlym);
         add(center, BorderLayout.CENTER);
         add(xia, BorderLayout.SOUTH);
+        updateData();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

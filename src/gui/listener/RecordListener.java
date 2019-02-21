@@ -58,7 +58,8 @@ public class RecordListener implements ActionListener {
         r.hfT.setText("");
 
         SpendPanel.spendPanel.updateData();
-        CategoryPanel.categoryPanel.updateData();
+        CategoryPanel.categoryPanel.update();
+        ReportPanel.reportPanel.updateData();
 
     }
 }

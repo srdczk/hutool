@@ -1,8 +1,10 @@
 package gui.panel;
 
+import dao.CategoryDAO;
 import gui.listener.RecordListener;
 import gui.model.flComboBox;
 import org.jdesktop.swingx.JXDatePicker;
+import pojo.Category;
 import service.CategoryService;
 import util.GUIUtil;
 
@@ -48,6 +50,13 @@ public class RecordPanel extends JPanel{
 //    public J
 //    JCheckBoxMenuItem
 
+    public void updateData() {
+        CategoryDAO categoryDAO = new CategoryDAO();
+        List<Category> categorys = categoryDAO.list();
+        flC.setModel(new flComboBox(){
+
+        });
+    }
 
     private RecordPanel()
     {
@@ -69,6 +78,7 @@ public class RecordPanel extends JPanel{
         add(new JPanel());
         add(center);
         jyb.addActionListener(new RecordListener());
+//        updateData();
 //        addMouseListener(new MouseAdapter() {
 //            @Override
 //            public void mouseClicked(MouseEvent e) {
@@ -80,7 +90,7 @@ public class RecordPanel extends JPanel{
     }
     public static void main(String[] args)
     {
-        GUIUtil.showPanel(RecordPanel.recordPanel);
 
     }
+
 }

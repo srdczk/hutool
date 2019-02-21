@@ -26,9 +26,25 @@ public class CategoryService {
     }
 
 
-    public void add(String s)
-    {
+    public void add(String s) {
         c.add(new Category(1, s));
+
+    }
+
+
+    public void update(String name, String newname)
+    {
+        List<Category> list = c.list();
+        int j = 0;
+        for(int i = 0; i < list.size(); ++i)
+        {
+            if(list.get(i).getName().equals(name))
+            {
+                j = i + 1;
+                break;
+            }
+        }
+        c.update(new Category(j, newname));
     }
 
 //    RecordDAO r = new RecordDAO();
